@@ -1,0 +1,37 @@
+ &project
+    project_rootname = "om6viscous_symmetry"
+    case_title = "OM6 Simple Turbulent Flow Solve Tutorial"
+ /
+ 
+ &reference_physical_properties
+    angle_of_attack   = 2.0
+    mach_number       = 0.7
+    reynolds_number   = 3000000.0
+    temperature       = 460.0
+    temperature_units = "Rankine"
+ /
+ 
+ &force_moment_integ_properties
+    area_reference =  1.067634
+    x_moment_length = 0.673700
+    y_moment_length = 1.020000
+    x_moment_center = 0.168425
+ /
+ 
+ &nonlinear_solver_parameters
+    schedule_cfl     =  10.0  200.0
+    schedule_cflturb =   1.0   20.0
+ /
+ 
+ &code_run_control
+    steps              = 1000
+    stopping_tolerance = 1.0E-15
+    restart_write_freq = 1000
+    restart_read = "off"
+ /
+
+ &raw_grid
+  grid_format = "fast"
+  data_format = "ascii"
+  patch_lumping = "none"
+ /

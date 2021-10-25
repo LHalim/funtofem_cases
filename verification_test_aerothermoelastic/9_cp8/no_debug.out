@@ -1,0 +1,976 @@
+NOT CMPLX_MODE
+start
+set comm
+comm misc
+built model
+FUN3D 13.6- Flow started 09/03/2020 at 16:05:37 with 1 processes
+Contents of fun3d.nml file below------------------------
+&project
+  project_rootname = 'tets'
+/
+&raw_grid
+  grid_format = 'aflr3'
+  data_format = 'default'
+  swap_yz_axes = .false.
+/
+&governing_equations
+  eqn_type      = 'compressible'
+  viscous_terms = 'turbulent'
+/
+&reference_physical_properties
+  mach_number     = 0.5
+  angle_of_attack = 0.0
+  reynolds_number = 1.357e4
+  temperature     = 300.0
+  temperature_units = 'Kelvin'
+/
+&inviscid_flux_method
+flux_construction       = 'roe'
+flux_limiter            = 'hvenkat'
+smooth_limiter_coeff    = 1.0
+freeze_limiter_iteration = 1
+/
+&code_run_control
+  restart_write_freq = 1
+  restart_read       = 'off'
+  steps              =  15
+/
+&nonlinear_solver_parameters
+  time_accuracy = "steady"
+  time_step_nondim =   0.1
+  subiterations =          0
+  schedule_iteration(1:2) = 1,10
+  schedule_cfl(1:2) = 200.0,200.0
+  schedule_cflturb(1:2) = 50.0,50.0
+/
+&elasticity_gmres
+  tol = 1.e-14
+/
+&global
+  moving_grid = .true.
+  boundary_animation_freq = 1
+  volume_animation_freq = 1
+/
+&slice_data
+  nslices	= 1
+  slice_z(:)	= .true.
+  slice_location(:) = 2.5
+/
+&boundary_output_variables
+  number_of_boundaries = -1
+  boundary_list        = '1-6'
+  temperature          = .true.
+  mach                 = .true.
+/
+&massoud_output
+  funtofem_include_skin_friction = .true.
+/
+&volume_output_variables
+  export_to ='vtk'
+  x = .false.
+  y = .false.
+  z = .false.
+  temperature = .true.
+  mach = .true.
+  p = .true.
+/
+Contents of fun3d.nml file above------------------------
+ The default "stream" data format is being used for the grid format "aflr3".
+ Namelist data file moving_body.input successfully opened
+   Namelist forced_motion not read
+   Namelist observer_motion not read
+   Namelist surface_motion_from_file not read
+   Namelist motion_from_file not read
+   Namelist composite_overset_mesh not read
+  ... Use the reference Mach number for the freestream:  T
+ Setting flow solver convergence tolerance to  0.1E-29
+ (to prevent unintended kickout from coupling process)
+ 
+ loading design ...
+ Preparing to read binary AFLR3 grid: tets.lb8.ugrid
+ error opening tets.lb8.ugrid
+ Preparing to read binary AFLR3 grid: tets.b8.ugrid
+ 
+  nnodes              485
+  ntface,nqface       454 0
+  ntet,npyr,nprz,nhex 2128 0 0 0
+ 
+cell statistics: type,      min volume,      max volume, max face angle
+cell statistics:  tet,  0.95574839E-02,  0.19435161E+00,  132.846864986
+cell statistics:  all,  0.95574839E-02,  0.19435161E+00,  132.846864986
+
+     ... Constructing partition node sets for level-0...                  2128 T
+     ... Edge Partitioning ....
+     ... Boundary partitioning....
+     ... Reordering for cache efficiency....
+     ... Write global grid information to tets.grid_info
+     ... Time after preprocess TIME/Mem(MB):  ********    129.02    129.02
+ Grid Motion Type 
+   deform
+ 
+  NOTE: kappa_umuscl set by grid: .00
+ 
+ Grid read complete
+  ... Use the reference Mach number for the freestream:  T
+ Setting Sutherland constant =   198.60 rather than default value of  198.60
+  Running an aeroelastic case with itime = 0
+  -->Setting ignore_grid_velocity to true
+  -->Setting need_grid_velocity to false
+  
+  Use of a smooth (differentiable) flux limiter detected
+  Examining the grid to compute the reference length....
+  The grid based limiter reference length is   0.394784313898527     
+  
+ 
+ Computing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+ 
+ Number of Moving Bodies:
+  1
+ 
+ Motion Data for Body    1
+   Body Name:   bc-6
+   Parent Name: 
+  Number of Boundaries Defining Body:
+    1
+  List of Boundaries Defining Body:
+    6
+  Mesh Movement For Body Motion
+   deform
+  Component Mesh ID:
+    0
+  Rotational Motion:
+   rotate
+    0
+   no forced rotation specified
+  Translational Motion
+   translate
+    0
+   no forced translation specified
+  List of Boundaries Used For Force/Moment Integration:
+    6
+  Moment Center:
+   xmc         ymc         zmc  
+   0.00000E+00 0.00000E+00 0.00000E+00
+   move_mc
+    1
+  Surface Files
+   No surface files specified
+ 
+ Moving Body Family Trees:
+ 
+   number after each component name is the generation;
+   generation 0 motion is relative to inertial frame
+   generation 1 motion is relative to generation 0
+   generation 2 motion is relative to generation 1, etc
+ 
+   Body Name: bc-6 (0)
+    Ancestors:
+      none
+    Descendants:
+      none
+ 
+ Body 1 initial moment center:   0.0000000E+00  0.0000000E+00  0.0000000E+00
+ Done.
+[0] Creating TACSAssembler with numOwnedNodes = 121 numElements = 100
+[0] BCSRMat: ILU(1000000) Input fill ratio 10.00, actual fill ratio: 2.36, nnz(ILU) = 2265
+Transfer scheme [0]: Creating scheme of type MELDThermal...
+created object
+FUN3D 13.6- Flow started 09/03/2020 at 16:05:41 with 1 processes
+Contents of fun3d.nml file below------------------------
+&project
+  project_rootname = 'tets'
+/
+&raw_grid
+  grid_format = 'aflr3'
+  data_format = 'default'
+  swap_yz_axes = .false.
+/
+&governing_equations
+  eqn_type      = 'compressible'
+  viscous_terms = 'turbulent'
+/
+&reference_physical_properties
+  mach_number     = 0.5
+  angle_of_attack = 0.0
+  reynolds_number = 1.357e4
+  temperature     = 300.0
+  temperature_units = 'Kelvin'
+/
+&inviscid_flux_method
+flux_construction       = 'roe'
+flux_limiter            = 'hvenkat'
+smooth_limiter_coeff    = 1.0
+freeze_limiter_iteration = 1
+/
+&code_run_control
+  restart_write_freq = 1
+  restart_read       = 'off'
+  steps              =  15
+/
+&nonlinear_solver_parameters
+  time_accuracy = "steady"
+  time_step_nondim =   0.1
+  subiterations =          0
+  schedule_iteration(1:2) = 1,10
+  schedule_cfl(1:2) = 200.0,200.0
+  schedule_cflturb(1:2) = 50.0,50.0
+/
+&elasticity_gmres
+  tol = 1.e-14
+/
+&global
+  moving_grid = .true.
+  boundary_animation_freq = 1
+  volume_animation_freq = 1
+/
+&slice_data
+  nslices	= 1
+  slice_z(:)	= .true.
+  slice_location(:) = 2.5
+/
+&boundary_output_variables
+  number_of_boundaries = -1
+  boundary_list        = '1-6'
+  temperature          = .true.
+  mach                 = .true.
+/
+&massoud_output
+  funtofem_include_skin_friction = .true.
+/
+&volume_output_variables
+  export_to ='vtk'
+  x = .false.
+  y = .false.
+  z = .false.
+  temperature = .true.
+  mach = .true.
+  p = .true.
+/
+Contents of fun3d.nml file above------------------------
+ The default "stream" data format is being used for the grid format "aflr3".
+ Namelist data file moving_body.input successfully opened
+   Namelist forced_motion not read
+   Namelist observer_motion not read
+   Namelist surface_motion_from_file not read
+   Namelist motion_from_file not read
+   Namelist composite_overset_mesh not read
+  ... Use the reference Mach number for the freestream:  T
+ Setting Sutherland constant =   198.60 rather than default value of  198.60
+ Setting flow solver convergence tolerance to  0.1E-29
+ (to prevent unintended kickout from coupling process)
+ 
+ loading design ...
+ Preparing to read binary AFLR3 grid: tets.lb8.ugrid
+ error opening tets.lb8.ugrid
+ Preparing to read binary AFLR3 grid: tets.b8.ugrid
+ 
+  nnodes              485
+  ntface,nqface       454 0
+  ntet,npyr,nprz,nhex 2128 0 0 0
+ 
+cell statistics: type,      min volume,      max volume, max face angle
+cell statistics:  tet,  0.95574839E-02,  0.19435161E+00,  132.846864986
+cell statistics:  all,  0.95574839E-02,  0.19435161E+00,  132.846864986
+
+     ... Constructing partition node sets for level-0...                  2128 T
+     ... Edge Partitioning ....
+     ... Boundary partitioning....
+     ... Reordering for cache efficiency....
+     ... Write global grid information to tets.grid_info
+     ... Time after preprocess TIME/Mem(MB):  ********    218.22    218.22
+  NOTE: kappa_umuscl set by grid: .00
+ 
+ Grid read complete
+  ... Use the reference Mach number for the freestream:  T
+ Setting Sutherland constant =   198.60 rather than default value of  198.60
+  Running an aeroelastic case with itime = 0
+  -->Setting ignore_grid_velocity to true
+  -->Setting need_grid_velocity to false
+  
+  Use of a smooth (differentiable) flux limiter detected
+  Examining the grid to compute the reference length....
+  The grid based limiter reference length is   0.394784313898527     
+  
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+ 
+ Number of Moving Bodies:
+  1
+ 
+ Motion Data for Body    1
+   Body Name:   bc-6
+   Parent Name: 
+  Number of Boundaries Defining Body:
+    1
+  List of Boundaries Defining Body:
+    6
+  Mesh Movement For Body Motion
+   deform
+  Component Mesh ID:
+    0
+  Rotational Motion:
+   rotate
+    0
+   no forced rotation specified
+  Translational Motion
+   translate
+    0
+   no forced translation specified
+  List of Boundaries Used For Force/Moment Integration:
+    6
+  Moment Center:
+   xmc         ymc         zmc  
+   0.00000E+00 0.00000E+00 0.00000E+00
+   move_mc
+    1
+  Surface Files
+   No surface files specified
+ 
+ Moving Body Family Trees:
+ 
+   number after each component name is the generation;
+   generation 0 motion is relative to inertial frame
+   generation 1 motion is relative to generation 0
+   generation 2 motion is relative to generation 1, etc
+ 
+   Body Name: bc-6 (0)
+    Ancestors:
+      none
+    Descendants:
+      none
+ 
+ Body 1 initial moment center:   0.0000000E+00  0.0000000E+00  0.0000000E+00
+ 
+ Begin Mesh Movement, Time Step 1   (Current Step 1)
+ Solving linear elasticity equations for mesh deformation
+   Info: initial call to elasticity solver
+     Elasticity model: (1/distance)**1.0
+     Linear solver: gmres
+     Left preconditioner: point-multicolor  Preconditioner iterations: 5
+     Initial values for solution taken as zero
+     Convergence tolerances: tol_rel = 0.10000000E-13 tol_abs = 0.10000000E-13
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+ Iter            density_RMS  density_MAX   X-location   Y-location   Z-location
+                    turb_RMS     turb_MAX   X-location   Y-location   Z-location
+    1  0.118038712763103E-01  0.61304E-01  0.00000E+00  0.40000E+01  0.00000E+00
+       0.488066001248417E-01  0.32849E+00  0.10091E+01  0.14510E+01  0.55201E+00
+       Lift -0.418586417345097E+01         Drag  0.464786359457678E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep1.dat
+  Time step: 1, ntt: 1, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep1.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 1
+ Time for write: .1 s
+ 
+ 
+ Begin Mesh Movement, Time Step 2   (Current Step 2)
+ Solving linear elasticity equations for mesh deformation
+   Info: restarting elasticity solver
+     Initial values for solution taken as final values from previous step
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+    2  0.698548343588938E-02  0.60847E-01  0.00000E+00  0.40000E+01  0.00000E+00
+       0.291590074418322E-01  0.20500E+00  0.39528E+01  0.19236E+01  0.60266E+00
+       Lift  0.114226564005929E+02         Drag  0.806963215117367E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep2.dat
+  Time step: 2, ntt: 2, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep2.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 2
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 3   (Current Step 3)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+    3  0.249094814309280E-01  0.11361E+00  0.80587E+00  0.33577E+01  0.88012E+00
+       0.199539349699548E-01  0.16152E+00  0.84856E+00  0.23428E+01  0.59116E+00
+       Lift -0.563154356417458E+01         Drag  0.332261138270949E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep3.dat
+  Time step: 3, ntt: 3, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep3.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 3
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 4   (Current Step 4)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+    4  0.138100030870867E-01  0.10123E+00  0.14911E+01  0.00000E+00  0.15452E+01
+       0.177436000199405E-01  0.12235E+00  0.84856E+00  0.23428E+01  0.59116E+00
+       Lift -0.662799385183886E+01         Drag  0.284021050111881E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep4.dat
+  Time step: 4, ntt: 4, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep4.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 4
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 5   (Current Step 5)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+    5  0.852776446371233E-02  0.55942E-01  0.00000E+00  0.32708E+01  0.69229E+00
+       0.141815643743738E-01  0.10430E+00  0.12591E+01  0.51761E+00  0.73975E+00
+       Lift -0.344925525752408E+01         Drag  0.360219013149578E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep5.dat
+  Time step: 5, ntt: 5, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep5.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 5
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 6   (Current Step 6)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+    6  0.447577051796946E-02  0.44255E-01  0.84856E+00  0.23428E+01  0.59116E+00
+       0.981788217343827E-02  0.91056E-01  0.12453E+01  0.43126E+01  0.52445E+00
+       Lift -0.109327592424173E+01         Drag  0.416317938980409E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep6.dat
+  Time step: 6, ntt: 6, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep6.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 6
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 7   (Current Step 7)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+    7  0.318725188261326E-02  0.23844E-01  0.00000E+00  0.32708E+01  0.69229E+00
+       0.597652517884505E-02  0.73545E-01  0.12453E+01  0.43126E+01  0.52445E+00
+       Lift  0.709170268088717E+00         Drag  0.460554604797113E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep7.dat
+  Time step: 7, ntt: 7, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep7.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 7
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 8   (Current Step 8)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+    8  0.197830704027718E-02  0.15071E-01  0.00000E+00  0.32708E+01  0.69229E+00
+       0.375978790013494E-02  0.52372E-01  0.12453E+01  0.43126E+01  0.52445E+00
+       Lift  0.178430131546700E+01         Drag  0.486570096226956E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep8.dat
+  Time step: 8, ntt: 8, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep8.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 8
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 9   (Current Step 9)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+    9  0.115624237311362E-02  0.64255E-02  0.00000E+00  0.41646E+01  0.83542E+00
+       0.233484118283911E-02  0.31660E-01  0.12453E+01  0.43126E+01  0.52445E+00
+       Lift  0.228228977720450E+01         Drag  0.497362724143316E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep9.dat
+  Time step: 9, ntt: 9, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep9.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 9
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 10   (Current Step 10)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+   10  0.781530600648181E-03  0.29196E-02  0.41646E+01  0.83542E+00  0.50000E+01
+       0.129721707593589E-02  0.13405E-01  0.12453E+01  0.43126E+01  0.52445E+00
+       Lift  0.237122010510586E+01         Drag  0.497193965478613E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep10.dat
+  Time step: 10, ntt: 10, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep10.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 10
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 11   (Current Step 11)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+   11  0.585173244406226E-03  0.27964E-02  0.50000E+01  0.10000E+01  0.50000E+01
+       0.911187623139693E-03  0.82449E-02  0.41646E+01  0.00000E+00  0.83542E+00
+       Lift  0.219260725049517E+01         Drag  0.490187865798062E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep11.dat
+  Time step: 11, ntt: 11, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep11.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 11
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 12   (Current Step 12)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+   12  0.405604743955147E-03  0.19653E-02  0.50000E+01  0.10000E+01  0.50000E+01
+       0.781453576187484E-03  0.71573E-02  0.17405E+01  0.50000E+01  0.69196E+00
+       Lift  0.200453782255519E+01         Drag  0.483468555210083E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep12.dat
+  Time step: 12, ntt: 12, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep12.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 12
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 13   (Current Step 13)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+   13  0.294968414254755E-03  0.12965E-02  0.40000E+01  0.50000E+01  0.50000E+01
+       0.669315339693948E-03  0.80455E-02  0.17405E+01  0.50000E+01  0.69196E+00
+       Lift  0.181948046556563E+01         Drag  0.477074654742455E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep13.dat
+  Time step: 13, ntt: 13, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep13.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 13
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 14   (Current Step 14)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+   14  0.198924426104858E-03  0.81455E-03  0.24940E+01  0.50000E+01  0.54150E+00
+       0.953407851360809E-03  0.13837E-01  0.24940E+01  0.00000E+00  0.54150E+00
+       Lift  0.158821427692855E+01         Drag  0.469298963851302E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep14.dat
+  Time step: 14, ntt: 14, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep14.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 14
+ Time for write: .0 s
+ 
+ 
+ Begin Mesh Movement, Time Step 15   (Current Step 15)
+ Solving linear elasticity equations for mesh deformation
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+   limiter frozen
+   15  0.195356129455550E-03  0.14181E-02  0.43093E+01  0.50000E+01  0.17256E+01
+       0.793140372235898E-03  0.92712E-02  0.83542E+00  0.50000E+01  0.83542E+00
+       Lift  0.130990652080724E+01         Drag  0.461088314622367E-02
+ 
+ Writing boundary output: tets_tec_boundary_timestep15.dat
+  Time step: 15, ntt: 15, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep15.vtk'
+ 
+ Writing tets.flow (version 12.2)
+  inserting current history iterations 15
+ Time for write: .0 s
+ 
+ Current value of function            1  4.610883146223673E-003
+ Current value of function            2   1.30990652080724     
+ Done.
+Forward Drag:  0.00461088314622
+objective =  0.00461088314622
+FUN3D 13.6- Adjoint started 09/03/2020 at 16:05:44 with 1 processes
+Contents of ../Flow//fun3d.nml file below------------------------
+&project
+  project_rootname = 'tets'
+/
+&raw_grid
+  grid_format = 'aflr3'
+  data_format = 'default'
+  swap_yz_axes = .false.
+/
+&governing_equations
+  eqn_type      = 'compressible'
+  viscous_terms = 'turbulent'
+/
+&reference_physical_properties
+  mach_number     = 0.5
+  angle_of_attack = 0.0
+  reynolds_number = 1.357e4
+  temperature     = 300.0
+  temperature_units = 'Kelvin'
+/
+&inviscid_flux_method
+flux_construction       = 'roe'
+flux_limiter            = 'hvenkat'
+smooth_limiter_coeff    = 1.0
+freeze_limiter_iteration = 1
+/
+&code_run_control
+  restart_write_freq = 1
+  restart_read       = 'off'
+  steps              =  15
+/
+&nonlinear_solver_parameters
+  time_accuracy = "steady"
+  time_step_nondim =   0.1
+  subiterations =          0
+  schedule_iteration(1:2) = 1,10
+  schedule_cfl(1:2) = 200.0,200.0
+  schedule_cflturb(1:2) = 50.0,50.0
+/
+&elasticity_gmres
+  tol = 1.e-14
+/
+&global
+  moving_grid = .true.
+  boundary_animation_freq = 1
+  volume_animation_freq = 1
+/
+&slice_data
+  nslices	= 1
+  slice_z(:)	= .true.
+  slice_location(:) = 2.5
+/
+&boundary_output_variables
+  number_of_boundaries = -1
+  boundary_list        = '1-6'
+  temperature          = .true.
+  mach                 = .true.
+/
+&massoud_output
+  funtofem_include_skin_friction = .true.
+/
+&volume_output_variables
+  export_to ='vtk'
+  x = .false.
+  y = .false.
+  z = .false.
+  temperature = .true.
+  mach = .true.
+  p = .true.
+/
+Contents of ../Flow//fun3d.nml file above------------------------
+ The default "stream" data format is being used for the grid format "aflr3".
+ Namelist data file ../Flow/moving_body.input successfully opened
+   Namelist forced_motion not read
+   Namelist observer_motion not read
+   Namelist surface_motion_from_file not read
+   Namelist motion_from_file not read
+   Namelist composite_overset_mesh not read
+  ... Use the reference Mach number for the freestream:  T
+ Setting Sutherland constant =   198.60 rather than default value of  198.60
+ Setting flow solver convergence tolerance to  0.1E-29
+ (to prevent unintended kickout from coupling process)
+ 
+ Code_id=           2
+ Preparing to read binary AFLR3 grid: ../Flow/tets.lb8.ugrid
+ error opening ../Flow/tets.lb8.ugrid
+ Preparing to read binary AFLR3 grid: ../Flow/tets.b8.ugrid
+ 
+  nnodes              485
+  ntface,nqface       454 0
+  ntet,npyr,nprz,nhex 2128 0 0 0
+ 
+cell statistics: type,      min volume,      max volume, max face angle
+cell statistics:  tet,  0.95574839E-02,  0.19435161E+00,  132.846864986
+cell statistics:  all,  0.95574839E-02,  0.19435161E+00,  132.846864986
+
+     ... Constructing partition node sets for level-0...                  2128 T
+     ... Edge Partitioning ....
+     ... Boundary partitioning....
+     ... Reordering for cache efficiency....
+     ... Write global grid information to tets.grid_info
+     ... Time after preprocess TIME/Mem(MB):  ********    222.94    222.94
+  NOTE: kappa_umuscl set by grid: .00
+ loading design ...
+  ... Use the reference Mach number for the freestream:  T
+ Setting Sutherland constant =   198.60 rather than default value of  198.60
+  Running an aeroelastic case with itime = 0
+  -->Setting ignore_grid_velocity to true
+  -->Setting need_grid_velocity to false
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+ 
+ Using linear elasticity to reposition grid...
+ 
+ loading design ...
+ No active shape variables: exiting from reposition_grid...
+ 
+ Number of Moving Bodies:
+  1
+ 
+ Motion Data for Body    1
+   Body Name:   bc-6
+   Parent Name: 
+  Number of Boundaries Defining Body:
+    1
+  List of Boundaries Defining Body:
+    6
+  Mesh Movement For Body Motion
+   deform
+  Component Mesh ID:
+    0
+  Rotational Motion:
+   rotate
+    0
+   no forced rotation specified
+  Translational Motion
+   translate
+    0
+   no forced translation specified
+  List of Boundaries Used For Force/Moment Integration:
+    6
+  Moment Center:
+   xmc         ymc         zmc  
+   0.00000E+00 0.00000E+00 0.00000E+00
+   move_mc
+    1
+  Surface Files
+   No surface files specified
+ 
+ Moving Body Family Trees:
+ 
+   number after each component name is the generation;
+   generation 0 motion is relative to inertial frame
+   generation 1 motion is relative to generation 0
+   generation 2 motion is relative to generation 1, etc
+ 
+   Body Name: bc-6 (0)
+    Ancestors:
+      none
+    Descendants:
+      none
+ 
+ Body 1 initial moment center:   0.0000000E+00  0.0000000E+00  0.0000000E+00
+ Static aeroelastic adjoint mesh update
+ 
+ Begin Mesh Movement, Time Step 15   (Current Step 15)
+ Solving linear elasticity equations for mesh deformation
+   Info: initial call to elasticity solver
+     Elasticity model: (1/distance)**1.0
+     Linear solver: gmres
+     Left preconditioner: point-multicolor  Preconditioner iterations: 5
+     Initial values for solution taken as zero
+     Convergence tolerances: tol_rel = 0.10000000E-13 tol_abs = 0.10000000E-13
+   Elasticity Convergence:
+     Search direction     1  residual =  0.00000000E+00   relative_residual =  0.00000000E+00
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.20000000E-13
+ 
+ Recomputing distance function:
+   Wall spacing: 0.483E+00 min, 0.880E+00 max, 0.734E+00 avg
+ 
+ Static adjoint mesh updated moving_grid = .false. now
+ 
+ Writing boundary output: tets_tec_boundary_timestep0.dat
+  Time step: 0, ntt: 15, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep0.vtk'
+ 
+ Reading ../Flow/tets.flow (version  12.20)
+ the restart files contains history iterations = 15
+ 
+       Lift  0.130990652080724E+01         Drag  0.461088314622367E-02
+Turb1  0.952543203419917E-06  0.11183E-04  0.00000E+00  0.32708E+01  0.69229E+00
+Turb1  0.539605755722183E-06  0.70900E-05  0.00000E+00  0.32708E+01  0.69229E+00
+ Iter            adjoint RMS  adjoint MAX   X location   Y location   Z location
+    1  0.392497114851557E-04  0.27797E-03  0.10091E+01  0.14510E+01  0.55201E+00
+ Iter            adjoint RMS  adjoint MAX   X location   Y location   Z location
+    1  0.688249170150276E-05  0.56107E-04  0.00000E+00  0.32708E+01  0.69229E+00
+ 
+ Writing boundary output: tets_tec_boundary_timestep1.dat
+  Time step: 1, ntt: 1, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep1.vtk'
+ Current value of function            1  4.610883146223673E-003
+ Current value of function            2   1.30990652080724     
+Reduced AOA derivative         =    0.23066824683767E-01
+Reduced yaw derivative         =   -0.32152407097541E-05
+Reduced AOA derivative         =    0.74545343946254E+00
+Reduced yaw derivative         =   -0.13660574340366E-02
+ NNSURF_LEFT            0                     0
+ 
+ Performing linear elasticity adjoint...
+ 
+ loading design ...
+ Solving mesh adjoint equations
+   Info: initial call to elasticity solver
+     Elasticity model: (1/distance)**1.0
+     Linear solver: gmres
+     Left preconditioner: point-multicolor  Preconditioner iterations: 5
+     Initial values for solution taken as zero
+     Convergence tolerances: tol_rel = 0.10000000E-13 tol_abs = 0.10000000E-13
+   Mesh Adjoint Convergence, Cost Function : 1
+     Search direction     1  residual =  0.60412446E+01   relative_residual =  0.10000000E+01
+     Search direction    11  residual =  0.50610330E-13   relative_residual =  0.83774673E-14
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.70412446E-13
+   Info: initial call to elasticity solver
+     Elasticity model: (1/distance)**1.0
+     Linear solver: gmres
+     Left preconditioner: point-multicolor  Preconditioner iterations: 5
+     Initial values for solution taken as zero
+     Convergence tolerances: tol_rel = 0.10000000E-13 tol_abs = 0.10000000E-13
+   Mesh Adjoint Convergence, Cost Function : 2
+     Search direction     1  residual =  0.15604310E+02   relative_residual =  0.10000000E+01
+     Search direction    14  residual =  0.16141525E-13   relative_residual =  0.10344274E-14
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.16604310E-12
+ Current value of function            1  4.610883146223673E-003
+ Current value of function            2   1.30990652080724     
+Reduced AOA derivative         =    0.23066824683767E-01
+Reduced yaw derivative         =   -0.32152407097541E-05
+Reduced AOA derivative         =    0.74545343946254E+00
+Reduced yaw derivative         =   -0.13660574340366E-02
+ NNSURF_LEFT            0                     0
+ 
+ Performing linear elasticity adjoint...
+ 
+ loading design ...
+ Solving mesh adjoint equations
+   Mesh Adjoint Convergence, Cost Function : 1
+     Search direction     1  residual =  0.60412446E+01   relative_residual =  0.10000000E+01
+     Search direction    11  residual =  0.50610330E-13   relative_residual =  0.83774673E-14
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.70412446E-13
+   Mesh Adjoint Convergence, Cost Function : 2
+     Search direction     1  residual =  0.15604310E+02   relative_residual =  0.10000000E+01
+     Search direction    14  residual =  0.16141455E-13   relative_residual =  0.10344229E-14
+     Convergence achieved: residual <= tol_rel * initial_residual + tol_abs =  0.16604310E-12
+ 
+ Writing boundary output: tets_tec_boundary_timestep15.dat
+  Time step: 15, ntt: 15, Prior iterations: 0
+ Writing Legacy VTK volume file='tets_volume_timestep15.vtk'
+ Done.
+Func  cd   0.00461088314622
+Grad  cd Var:  AOA   0.0230668246838
+Grad  cd Var:  thickness   0j
+Func  cl   1.30990652081
+Grad  cl Var:  AOA   0.745453439463
+Grad  cl Var:  thickness   0j
+grad =  [[0.023066824683767+0.j 0.               +0.j]
+ [0.745453439462537+0.j 0.               +0.j]
+ [0.               +0.j 0.               +0.j]]
+FINISHED
+Transfer scheme [0]: freeing MELD data...
