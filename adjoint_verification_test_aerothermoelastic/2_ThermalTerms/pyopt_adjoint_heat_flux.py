@@ -117,13 +117,12 @@ class wedge_adjoint(object):
 
         self.model = model
 
-    def verification_test(self, steps=100):
+    def verification_test(self,epsilon=1e-6,steps=100):
         
         steady = self.model.scenarios[0]
         bodies = self.model.bodies
         body = self.model.bodies[0]
                 
-        epsilon = 1e-7
         fail = self.driver.solve_forward()
         fail = self.driver.solve_adjoint()
 
@@ -223,5 +222,5 @@ dp = wedge_adjoint()
 print('created object')
 
 print('VERIFICATION TEST')
-Error = dp.verification_test()
+Error = dp.verification_test(epsilon=1e-6)
 print('FINISHED VERIFICATION TEST')

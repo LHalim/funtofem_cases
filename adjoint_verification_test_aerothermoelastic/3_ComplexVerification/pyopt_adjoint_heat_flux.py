@@ -27,10 +27,8 @@ from __future__ import print_function
 from pyfuntofem.model  import *
 from pyfuntofem.driver import *
 from pyfuntofem.fun3d_interface_verification_test import *
-#from pyfuntofem.massoud_body import *
 
 from tacs_model import wedgeTACS
-#from pyOpt import Optimization,SLSQP
 from mpi4py import MPI
 import os
 import numpy as np
@@ -153,10 +151,10 @@ class wedge_adjoint(object):
 
         if body.transfer is not None:
             # Aeroelastic Terms
-            body.dLdfa = np.random.uniform(size=body.dLdfa.shape)       
+            body.dLdfa = np.ones(shape=body.dLdfa.shape,dtype=TransferScheme.dtype)       
         if body.thermal_transfer is not None:
             # Aerothermal Terms
-            body.dQdfta = np.random.uniform(size=body.dQdfta.shape)
+            body.dQdfta = np.ones(shape=body.dQdfta.shape,dtype=TransferScheme.dtype)
 
         #self.driver._solve_steady_adjoint(steady)
         for step in range(1,steps+1):
@@ -167,13 +165,13 @@ class wedge_adjoint(object):
         if body.transfer is not None:
             # Aeroelastic Terms
             adjoint_product = 0.0
-            body.aero_disps_pert = np.random.uniform(size=body.aero_disps.shape)
+            body.aero_disps_pert = np.ones(shape=body.aero_disps.shape,dtype=TransferScheme.dtype)
             body.aero_disps += epsilon*body.aero_disps_pert*1j
             adjoint_product += np.dot(body.dGdua[:, 0], body.aero_disps_pert) 
         if body.thermal_transfer is not None:
             # Aerothermal Terms
             adjoint_product_t = 0.0
-            body.aero_temps_pert = np.random.uniform(size=body.aero_temps.shape)
+            body.aero_temps_pert = np.ones(shape=body.aero_temps.shape,dtype=TransferScheme.dtype)
             body.aero_temps += epsilon*body.aero_temps_pert*1j
             adjoint_product_t += np.dot(body.dAdta[:, 0], body.aero_temps_pert)
 
