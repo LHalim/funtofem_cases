@@ -25,7 +25,7 @@ import numpy as np
 
 class wedgeTACS(TacsSteadyInterface):
     def __init__(self, comm, tacs_comm, model, n_tacs_procs):
-        super(wedgeTACS,self).__init__(comm, tacs_comm, model, ndof=4)
+        super(wedgeTACS,self).__init__(comm, tacs_comm, model)
 
         self.tacs_proc = False
         if comm.Get_rank() < n_tacs_procs:
@@ -74,68 +74,9 @@ class wedgeTACS(TacsSteadyInterface):
 
             # Create the assembler object
             assembler = mesh.createTACS(varsPerNode)
-            res = assembler.createVec()
-            ans = assembler.createVec()
-            mat = assembler.createSchurMat()
 
-            # Create distributed node vector from TACS Assembler object and
-            # extract the node locations
-            nbodies = 1
-            struct_X = []
-            struct_nnodes = []
-            for body in range(nbodies):
-                self.struct_X_vec = assembler.createNodeVec()
-                assembler.getNodes(self.struct_X_vec)
-                struct_X.append(self.struct_X_vec.getArray())
-                struct_nnodes.append(len(struct_X) / 3)
+        self._initialize_variables(assembler)
 
-            assembler.setNodes(self.struct_X_vec)
-
-            # Create the preconditioner for the corresponding matrix
-            pc = TACS.Pc(mat)
-
-            alpha = 1.0
-            beta = 0.0
-            gamma = 0.0
-            assembler.assembleJacobian(alpha,beta,gamma,res,mat)
-            pc.factor()
-
-            # Create GMRES object for structural adjoint solves
-            nrestart = 0 # number of restarts before giving up
-            m = 30 # size of Krylov subspace (max # of iterations)
-            gmres = TACS.KSM(mat, pc, m, nrestart)
-
-            # Initialize member variables pertaining to TACS
-            self.T_ref = T_ref
-            self.vol = volume
-            self.assembler = assembler
-            self.res = res
-            self.ans = ans
-            self.ext_force = assembler.createVec()
-            self.update = assembler.createVec()
-            self.mat = mat
-            self.pc = pc
-            self.struct_X = struct_X
-            self.struct_nnodes = struct_nnodes
-            self.gmres = gmres
-            self.svsens = assembler.createVec()
-            self.struct_rhs_vec = assembler.createVec()
-            self.psi_S_vec = assembler.createVec()
-            psi_S = self.psi_S_vec.getArray()
-            self.psi_S = np.zeros((psi_S.size,self.nfunc),dtype=TACS.dtype)
-            self.psi_T_S_vec = assembler.createVec()
-            psi_T_S = self.psi_T_S_vec.getArray()
-            self.psi_T_S = np.zeros((psi_T_S.size,self.nfunc),dtype=TACS.dtype)
-            self.ans_array = []
-            self.svsenslist = []
-            self.dvsenslist = []
-
-            for func in range(self.nfunc):
-                self.svsenslist.append(self.assembler.createVec())
-                self.dvsenslist.append(self.assembler.createDesignVec())
-
-            for scenario in range(len(model.scenarios)):
-                self.ans_array.append(self.ans.getArray().copy())
         self.initialize(model.scenarios[0],model.bodies)
 
     def post_export_f5(self):

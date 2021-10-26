@@ -79,7 +79,7 @@ class wedge_adjoint(object):
         solvers['structural'] = wedgeTACS(self.comm,self.tacs_comm,self.model,n_tacs_procs)
 
         # L&D transfer options
-        transfer_options = {'analysis_type': 'aeroelastic','scheme': 'meld', 'thermal_scheme': 'meld'}
+        transfer_options = {'analysis_type': 'aerothermal','scheme': 'meld', 'thermal_scheme': 'meld'}
 
         # instantiate the driver
         self.driver = FUNtoFEMnlbgs(solvers,self.comm,self.tacs_comm,0,self.comm,0,transfer_options,model=self.model)
@@ -98,7 +98,7 @@ class wedge_adjoint(object):
         thickness = 0.015
         # Build the model
         model = FUNtoFEMmodel('wedge')
-        plate = Body('plate',analysis_type='aeroelastic',group=0,boundary=1)
+        plate = Body('plate',analysis_type='aerothermal',group=0,boundary=1)
         plate.add_variable('structural',Variable('thickness',value=thickness,lower = 0.01, upper = 0.1))
         model.add_body(plate)
 
@@ -117,13 +117,12 @@ class wedge_adjoint(object):
 
         self.model = model
 
-    def verification_test(self, steps=100):
+    def verification_test(self,epsilon=1e-6,steps=100):
         
         steady = self.model.scenarios[0]
         bodies = self.model.bodies
         body = self.model.bodies[0]
                 
-        epsilon = 1e-6
         fail = self.driver.solve_forward()
         fail = self.driver.solve_adjoint()
 
@@ -223,5 +222,5 @@ dp = wedge_adjoint()
 print('created object')
 
 print('VERIFICATION TEST')
-Error = dp.verification_test()
+Error = dp.verification_test(epsilon=1e-6)
 print('FINISHED VERIFICATION TEST')
