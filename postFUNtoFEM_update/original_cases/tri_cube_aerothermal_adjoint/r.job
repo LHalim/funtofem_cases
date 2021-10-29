@@ -1,0 +1,14 @@
+#!/bin/bash
+#PBS -N funtofem_adjoint_test
+#PBS -W group_list=a1607
+#PBS -l select=1:ncpus=1:mpiprocs=1:model=san
+#PBS -l walltime=0:15:00
+#PBS -q devel
+#PBS -j oe
+#PBS -m e
+
+ulimit -s unlimited
+cd $PBS_O_WORKDIR
+source ~/.profile
+#export CMPLX_MODE=1
+time mpiexec_mpt -n 1 python pyopt_adjoint_heat_flux.py 2>&1 > opt.out
