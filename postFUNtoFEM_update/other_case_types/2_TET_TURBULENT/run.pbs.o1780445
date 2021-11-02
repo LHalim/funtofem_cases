@@ -1,13 +1,13 @@
-Start Prologue v2.5.3 Mon Nov  1 22:07:38 EDT 2021 
-r3i6n35: MemFree:        185629888 kB
-End Prologue v2.5.3 Mon Nov  1 22:07:43 EDT 2021 
-JOBID  QSTAT_OUT 1780417
+Start Prologue v2.5.3 Mon Nov  1 22:52:39 EDT 2021 
+r1i5n25: MemFree:        185499936 kB
+End Prologue v2.5.3 Mon Nov  1 22:52:44 EDT 2021 
+JOBID  QSTAT_OUT 1780445
 EUID 0
 WORKSPACE /p/work1
 PBS_HOME /var/spool/pbs
-JOB_ID 1780417.pbsserver
+JOB_ID 1780445.pbsserver
 whoami root
-LOG /p/work1/PBS/prologue/1780417.pbsserver
+LOG /p/work1/PBS/prologue/1780445.pbsserver
 whoami root
 file workspace /p/work1: directory
 file /p /p: directory
@@ -15,7 +15,7 @@ PBS_REQUESTED_CPH = 48
 PBS_REQUESTED_CPS = 172800
 jobStarter
 Information: Please note that compiler is Intel but /p/app/gnu/7.3.0/bin is now also in PATH
-forrtl: error (63): output conversion error, unit -1, file /proc/317332/fd/1
+forrtl: error (63): output conversion error, unit -1, file /proc/214925/fd/1
 Image              PC                Routine            Line        Source             
 libifcoremt.so.5   00002AAAC796E622  for__io_return        Unknown  Unknown
 libifcoremt.so.5   00002AAAC79DFD5B  for_write_seq_fmt     Unknown  Unknown
@@ -136,7 +136,7 @@ python             00005555557C03B8  Py_RunMain            Unknown  Unknown
 python             00005555557C05B9  Py_BytesMain          Unknown  Unknown
 libc-2.17.so       00002AAAAB616555  __libc_start_main     Unknown  Unknown
 python3.9          0000555555748A64  Unknown               Unknown  Unknown
-forrtl: error (63): output conversion error, unit -1, file /proc/317332/fd/1
+forrtl: error (63): output conversion error, unit -1, file /proc/214925/fd/1
 Image              PC                Routine            Line        Source             
 libifcoremt.so.5   00002AAAC796E622  for__io_return        Unknown  Unknown
 libifcoremt.so.5   00002AAAC79DFD5B  for_write_seq_fmt     Unknown  Unknown
@@ -2695,7 +2695,7 @@ MPT Warning: Could not load libmpi_lustre.so in rank 0
   _flow.design_wrapper.push_composite_func(fid,ncomp,start,stop,weight,target,power,value,ftype,upper,lower)
 /p/home/lhalim/fun3d/fun3d/Python/fun3d/interface.py:376: ComplexWarning: Casting complex values to real discards the imaginary part
   _flow.design_wrapper.push_component_func(func,fid,boundary,name,value,
-forrtl: error (63): output conversion error, unit -1, file /proc/317332/fd/1
+forrtl: error (63): output conversion error, unit -1, file /proc/214925/fd/1
 Image              PC                Routine            Line        Source             
 libifcoremt.so.5   00002AAAC796E622  for__io_return        Unknown  Unknown
 libifcoremt.so.5   00002AAAC79DFD5B  for_write_seq_fmt     Unknown  Unknown
@@ -2956,6 +2956,42 @@ copied an array: size=33, elsize=16
 copied an array: size=33, elsize=16
 /p/home/lhalim/git/funtofem/pyfuntofem/fun3d_interface.py:657: ComplexWarning: Casting complex values to real discards the imaginary part
   self.dHdq[func] -= np.dot(body.aero_heat_flux_mag, psi_Q[:, func])/ self.thermal_scale
+forrtl: warning (406): fort: (1): In call to TRANSPOSE_TURB_JACOBIAN, an array temporary was created for argument #3
+
+Image              PC                Routine            Line        Source             
+libifcoremt.so.5   00002AAAC79705A3  for_emit_diagnost     Unknown  Unknown
+_flow.cpython-39-  00002AAAB5C89BA1  fill_jacobians_mp     Unknown  Unknown
+_flow.cpython-39-  00002AAAB286DF85  adjoint_mp_step_p     Unknown  Unknown
+_flow.cpython-39-  00002AAAB28776E4  adjoint_mp_iterat     Unknown  Unknown
+_flow.cpython-39-  00002AAAB28150B3  adjoint_wrapper_m     Unknown  Unknown
+_flow.cpython-39-  00002AAAB27DBBD5  Unknown               Unknown  Unknown
+python             0000555555694E4F  _PyObject_MakeTpC     Unknown  Unknown
+python             0000555555724E29  _PyEval_EvalFrame     Unknown  Unknown
+python3.9          00005555556DAB32  Unknown               Unknown  Unknown
+python             00005555556DB697  _PyFunction_Vecto     Unknown  Unknown
+python3.9          0000555555652F00  Unknown               Unknown  Unknown
+python3.9          00005555556DAB32  Unknown               Unknown  Unknown
+python             00005555556DB697  _PyFunction_Vecto     Unknown  Unknown
+python3.9          00005555556531A4  Unknown               Unknown  Unknown
+python             00005555556DB8C3  _PyFunction_Vecto     Unknown  Unknown
+python3.9          00005555556531A4  Unknown               Unknown  Unknown
+python             00005555556DB8C3  _PyFunction_Vecto     Unknown  Unknown
+python3.9          00005555556531A4  Unknown               Unknown  Unknown
+python             00005555556DB8C3  _PyFunction_Vecto     Unknown  Unknown
+python3.9          00005555556531A4  Unknown               Unknown  Unknown
+python3.9          00005555557063FD  Unknown               Unknown  Unknown
+python3.9          0000555555652F00  Unknown               Unknown  Unknown
+python3.9          00005555556DAB32  Unknown               Unknown  Unknown
+python             000055555578ADDC  PyEval_EvalCodeEx     Unknown  Unknown
+python             00005555556DBB5B  PyEval_EvalCode       Unknown  Unknown
+python3.9          000055555578AE8B  Unknown               Unknown  Unknown
+python3.9          00005555557BB215  Unknown               Unknown  Unknown
+python3.9          0000555555666677  Unknown               Unknown  Unknown
+python             00005555557BFCEF  PyRun_SimpleFileE     Unknown  Unknown
+python             00005555557C03B8  Py_RunMain            Unknown  Unknown
+python             00005555557C05B9  Py_BytesMain          Unknown  Unknown
+libc-2.17.so       00002AAAAB616555  __libc_start_main     Unknown  Unknown
+python3.9          0000555555748A64  Unknown               Unknown  Unknown
 copied an array: size=33, elsize=16
 copied an array: size=33, elsize=16
 copied an array: size=33, elsize=16
@@ -5782,7 +5818,7 @@ python             00005555557C03B8  Py_RunMain            Unknown  Unknown
 python             00005555557C05B9  Py_BytesMain          Unknown  Unknown
 libc-2.17.so       00002AAAAB616555  __libc_start_main     Unknown  Unknown
 python3.9          0000555555748A64  Unknown               Unknown  Unknown
-forrtl: error (63): output conversion error, unit -1, file /proc/317332/fd/1
+forrtl: error (63): output conversion error, unit -1, file /proc/214925/fd/1
 Image              PC                Routine            Line        Source             
 libifcoremt.so.5   00002AAAC796E622  for__io_return        Unknown  Unknown
 libifcoremt.so.5   00002AAAC79DFD5B  for_write_seq_fmt     Unknown  Unknown
@@ -7965,7 +8001,7 @@ python             00005555557C03B8  Py_RunMain            Unknown  Unknown
 python             00005555557C05B9  Py_BytesMain          Unknown  Unknown
 libc-2.17.so       00002AAAAB616555  __libc_start_main     Unknown  Unknown
 python3.9          0000555555748A64  Unknown               Unknown  Unknown
-forrtl: error (63): output conversion error, unit -1, file /proc/317332/fd/1
+forrtl: error (63): output conversion error, unit -1, file /proc/214925/fd/1
 Image              PC                Routine            Line        Source             
 libifcoremt.so.5   00002AAAC796E622  for__io_return        Unknown  Unknown
 libifcoremt.so.5   00002AAAC79DFD5B  for_write_seq_fmt     Unknown  Unknown
@@ -8208,6 +8244,38 @@ copied an array: size=33, elsize=16
 copied an array: size=33, elsize=16
 copied an array: size=33, elsize=16
 copied an array: size=33, elsize=16
+forrtl: warning (406): fort: (1): In call to TRANSPOSE_TURB_JACOBIAN, an array temporary was created for argument #3
+
+Image              PC                Routine            Line        Source             
+libifcoremt.so.5   00002AAAC79705A3  for_emit_diagnost     Unknown  Unknown
+_flow.cpython-39-  00002AAAB5C89BA1  fill_jacobians_mp     Unknown  Unknown
+_flow.cpython-39-  00002AAAB286DF85  adjoint_mp_step_p     Unknown  Unknown
+_flow.cpython-39-  00002AAAB28776E4  adjoint_mp_iterat     Unknown  Unknown
+_flow.cpython-39-  00002AAAB28150B3  adjoint_wrapper_m     Unknown  Unknown
+_flow.cpython-39-  00002AAAB27DBBD5  Unknown               Unknown  Unknown
+python             0000555555694E4F  _PyObject_MakeTpC     Unknown  Unknown
+python             0000555555724E29  _PyEval_EvalFrame     Unknown  Unknown
+python3.9          00005555556DAB32  Unknown               Unknown  Unknown
+python             00005555556DB697  _PyFunction_Vecto     Unknown  Unknown
+python3.9          0000555555652F00  Unknown               Unknown  Unknown
+python3.9          00005555556DAB32  Unknown               Unknown  Unknown
+python             00005555556DB697  _PyFunction_Vecto     Unknown  Unknown
+python3.9          00005555556531A4  Unknown               Unknown  Unknown
+python             00005555556DB8C3  _PyFunction_Vecto     Unknown  Unknown
+python3.9          00005555556531A4  Unknown               Unknown  Unknown
+python3.9          00005555557063FD  Unknown               Unknown  Unknown
+python3.9          0000555555652F00  Unknown               Unknown  Unknown
+python3.9          00005555556DAB32  Unknown               Unknown  Unknown
+python             000055555578ADDC  PyEval_EvalCodeEx     Unknown  Unknown
+python             00005555556DBB5B  PyEval_EvalCode       Unknown  Unknown
+python3.9          000055555578AE8B  Unknown               Unknown  Unknown
+python3.9          00005555557BB215  Unknown               Unknown  Unknown
+python3.9          0000555555666677  Unknown               Unknown  Unknown
+python             00005555557BFCEF  PyRun_SimpleFileE     Unknown  Unknown
+python             00005555557C03B8  Py_RunMain            Unknown  Unknown
+python             00005555557C05B9  Py_BytesMain          Unknown  Unknown
+libc-2.17.so       00002AAAAB616555  __libc_start_main     Unknown  Unknown
+python3.9          0000555555748A64  Unknown               Unknown  Unknown
 copied an array: size=33, elsize=16
 copied an array: size=33, elsize=16
 copied an array: size=33, elsize=16
@@ -10782,7 +10850,7 @@ python             00005555557C03B8  Py_RunMain            Unknown  Unknown
 python             00005555557C05B9  Py_BytesMain          Unknown  Unknown
 libc-2.17.so       00002AAAAB616555  __libc_start_main     Unknown  Unknown
 python3.9          0000555555748A64  Unknown               Unknown  Unknown
-forrtl: error (63): output conversion error, unit -1, file /proc/317332/fd/1
+forrtl: error (63): output conversion error, unit -1, file /proc/214925/fd/1
 Image              PC                Routine            Line        Source             
 libifcoremt.so.5   00002AAAC796E622  for__io_return        Unknown  Unknown
 libifcoremt.so.5   00002AAAC79DFD5B  for_write_seq_fmt     Unknown  Unknown
@@ -12966,16 +13034,16 @@ python             00005555557C05B9  Py_BytesMain          Unknown  Unknown
 libc-2.17.so       00002AAAAB616555  __libc_start_main     Unknown  Unknown
 python3.9          0000555555748A64  Unknown               Unknown  Unknown
 
-real	5m29.479s
-user	5m19.652s
-sys	0m7.148s
-Start Epilogue v2.5.3 Mon Nov  1 22:13:17 EDT 2021 
+real	7m18.809s
+user	7m8.601s
+sys	0m7.176s
+Start Epilogue v2.5.3 Mon Nov  1 23:00:05 EDT 2021 
 Memory usage reported in GB
                     % of     user     user     user    total    total
 Node               limit      max    limit  current  current     phys
-r3i6n35             0.20     0.35   175.00     0.13     5.28   187.31
+r1i5n25             0.21     0.36   175.00     0.14     5.33   187.31
 Memory summary:
-		min    0.35 GB
-		max    0.35 GB
-		ave    0.35 GB
-End Epilogue v2.5.3 Mon Nov  1 22:13:22 EDT 2021 
+		min    0.36 GB
+		max    0.36 GB
+		ave    0.36 GB
+End Epilogue v2.5.3 Mon Nov  1 23:00:11 EDT 2021 
