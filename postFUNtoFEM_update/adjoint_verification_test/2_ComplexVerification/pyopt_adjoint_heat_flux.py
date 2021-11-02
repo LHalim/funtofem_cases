@@ -79,7 +79,7 @@ class wedge_adjoint(object):
         solvers['structural'] = wedgeTACS(self.comm,self.tacs_comm,self.model,n_tacs_procs)
 
         # L&D transfer options
-        transfer_options = {'analysis_type': 'aerothermoelastic','scheme': 'meld', 'thermal_scheme': 'meld'}
+        transfer_options = {'analysis_type': 'aerothermal','scheme': 'meld', 'thermal_scheme': 'meld'}
 
         # instantiate the driver
         self.driver = FUNtoFEMnlbgs(solvers,self.comm,self.tacs_comm,0,self.comm,0,transfer_options,model=self.model)
@@ -98,7 +98,7 @@ class wedge_adjoint(object):
         thickness = 0.015
         # Build the model
         model = FUNtoFEMmodel('wedge')
-        plate = Body('plate',analysis_type='aerothermoelastic',group=0,boundary=1)
+        plate = Body('plate',analysis_type='aerothermal',group=0,boundary=1)
         plate.add_variable('structural',Variable('thickness',value=thickness,lower = 0.01, upper = 0.1))
         model.add_body(plate)
 
@@ -163,6 +163,14 @@ class wedge_adjoint(object):
             fail = self.driver.solvers['flow'].iterate_adjoint(steady, bodies, step)
         self.driver._post_adjoint(steady, bodies)
         """
+        
+        nfunctions=1
+        if body.transfer is not None:
+            # Aeroelastic Terms
+            body.dLdfa = np.random.uniform(size=(body.aero_nnodes*3, nfunctions))
+        if body.thermal_transfer is not None:
+            # Aerothermal Terms
+            body.dQdfta = np.random.uniform(size=(body.aero_nnodes, nfunctions))
 
         # Perturb and Get Adjoint Product
         if body.transfer is not None:
@@ -174,7 +182,9 @@ class wedge_adjoint(object):
         if body.thermal_transfer is not None:
             # Aerothermal Terms
             #adjoint_product_t = 0.0
-            body.aero_temps_pert = np.random.uniform(size=body.aero_temps.shape)
+            #body.aero_temps_pert = np.random.uniform(size=body.aero_temps.shape)
+            body.aero_temps_pert = np.ones(shape=body.aero_temps.shape)
+            body.aero_temps_pert[0] = 2
             body.aero_temps += epsilon*body.aero_temps_pert*1j
             #adjoint_product_t += np.dot(body.dAdta[:, 0], body.aero_temps_pert)
 
@@ -216,5 +226,5 @@ dp = wedge_adjoint()
 print('created object')
 
 print('VERIFICATION TEST')
-Error = dp.verification_test(epsilon=1e-6)
+Error = dp.verification_test(epsilon=1e-30)
 print('FINISHED VERIFICATION TEST')

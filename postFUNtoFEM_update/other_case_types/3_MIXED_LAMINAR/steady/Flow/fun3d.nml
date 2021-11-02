@@ -56,7 +56,7 @@ freeze_limiter_iteration = 1
   mach                 = .true.
 /
 &massoud_output
-  funtofem_include_skin_friction = .true.
+  funtofem_include_skin_friction = .false.
 /
 &volume_output_variables
   export_to ='vtk'
