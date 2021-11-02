@@ -1,5 +1,5 @@
 &project
-  project_rootname = 'tets'
+  project_rootname = 'mixed'
 /
 &raw_grid
   grid_format = 'aflr3'
@@ -8,7 +8,10 @@
 /
 &governing_equations
   eqn_type      = 'compressible'
-  viscous_terms = 'laminar'
+  viscous_terms = 'turbulent'
+/
+&turbulent_diffusion_models
+  turbulence_model = 'sa'
 /
 &reference_physical_properties
   mach_number     = 0.5

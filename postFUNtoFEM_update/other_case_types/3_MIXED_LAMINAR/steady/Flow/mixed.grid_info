@@ -16,13 +16,13 @@ Global Grid Info
      number of nodes            : 42
  
    boundary info for boundary2
-     boundary condition         : symmetry_y (6662)
-     number of tria faces       : 0
-     number of quad faces       : 30
-     number of nodes            : 42
+     boundary condition         : farfield_riem (5000)
+     number of tria faces       : 80
+     number of quad faces       : 0
+     number of nodes            : 51
  
    boundary info for boundary3
-     boundary condition         : symmetry_y (6662)
+     boundary condition         : farfield_riem (5000)
      number of tria faces       : 80
      number of quad faces       : 0
      number of nodes            : 51
@@ -41,9 +41,9 @@ Global Grid Info
  
    boundary info for boundary6
      boundary condition         : viscous_solid (4000)
-     number of tria faces       : 80
-     number of quad faces       : 0
-     number of nodes            : 51
+     number of tria faces       : 0
+     number of quad faces       : 30
+     number of nodes            : 42
  
  
 Info for Grid Partition 1
@@ -64,13 +64,13 @@ Info for Grid Partition 1
      number of nodes            : 42
  
    boundary info for boundary 2
-     boundary condition         : symmetry_y (6662)
-     number of tria faces       : 0
-     number of quad faces       : 30
-     number of nodes            : 42
+     boundary condition         : farfield_riem (5000)
+     number of tria faces       : 80
+     number of quad faces       : 0
+     number of nodes            : 51
  
    boundary info for boundary 3
-     boundary condition         : symmetry_y (6662)
+     boundary condition         : farfield_riem (5000)
      number of tria faces       : 80
      number of quad faces       : 0
      number of nodes            : 51
@@ -89,7 +89,7 @@ Info for Grid Partition 1
  
    boundary info for boundary 6
      boundary condition         : viscous_solid (4000)
-     number of tria faces       : 80
-     number of quad faces       : 0
-     number of nodes            : 51
+     number of tria faces       : 0
+     number of quad faces       : 30
+     number of nodes            : 42
  
