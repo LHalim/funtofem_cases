@@ -1,0 +1,33 @@
+Start Prologue v2.5.3 Fri Nov  5 13:14:59 EDT 2021 
+r4i4n15: MemFree:        185299772 kB
+End Prologue v2.5.3 Fri Nov  5 13:15:04 EDT 2021 
+JOBID  QSTAT_OUT 1784664
+EUID 0
+WORKSPACE /p/work1
+PBS_HOME /var/spool/pbs
+JOB_ID 1784664.pbsserver
+whoami root
+LOG /p/work1/PBS/prologue/1784664.pbsserver
+whoami root
+file workspace /p/work1: directory
+file /p /p: directory
+PBS_REQUESTED_CPH = 48
+PBS_REQUESTED_CPS = 172800
+jobStarter
+Information: Please note that compiler is Intel but /p/app/gnu/7.3.0/bin is now also in PATH
+MPT ERROR: MPI_COMM_WORLD rank 0 has terminated without calling MPI_Finalize()
+	aborting job
+
+real	0m7.124s
+user	0m0.242s
+sys	0m0.296s
+Start Epilogue v2.5.3 Fri Nov  5 13:15:15 EDT 2021 
+Memory usage reported in GB
+                    % of     user     user     user    total    total
+Node               limit      max    limit  current  current     phys
+r4i4n15             0.12     0.21   175.00     0.08     5.51   187.31
+Memory summary:
+		min    0.21 GB
+		max    0.21 GB
+		ave    0.21 GB
+End Epilogue v2.5.3 Fri Nov  5 13:15:19 EDT 2021 
