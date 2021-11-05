@@ -126,6 +126,8 @@ class wedge_adjoint(object):
         fail = self.driver.solve_forward()
         fail = self.driver.solve_adjoint()
 
+        print('FINISHED')
+        """
         #solve_forward() 1
         self.driver._distribute_variables(steady, bodies)
         self.driver._distribute_functions(steady, bodies)
@@ -135,7 +137,7 @@ class wedge_adjoint(object):
         for step in range(1,steps+1):
             fail = self.driver.solvers['flow'].iterate(steady, bodies, step)
         self.driver._post_forward(steady, bodies)
-       
+
         # Store Output
         if body.transfer is not None:
             # Aeroelastic Terms
@@ -150,12 +152,14 @@ class wedge_adjoint(object):
         self.driver._initialize_adjoint_variables(steady, bodies)
         self.driver._initialize_adjoint(steady, bodies)
 
+        nfunctions=1
         if body.transfer is not None:
             # Aeroelastic Terms
-            body.dLdfa = np.random.uniform(size=body.dLdfa.shape)       
+            body.dLdfa = np.ones(shape=(body.aero_nnodes*3, nfunctions))
         if body.thermal_transfer is not None:
             # Aerothermal Terms
-            body.dQdfta = np.random.uniform(size=body.dQdfta.shape)
+            body.dQdfta = np.ones(shape=(body.aero_nnodes, nfunctions))
+
 
         #self.driver._solve_steady_adjoint(steady)
         for step in range(1,steps+1):
@@ -166,13 +170,17 @@ class wedge_adjoint(object):
         if body.transfer is not None:
             # Aeroelastic Terms
             adjoint_product = 0.0
-            body.aero_disps_pert = np.random.uniform(size=body.aero_disps.shape)
+            #body.aero_disps_pert = np.random.uniform(size=body.aero_disps.shape)
+            body.aero_disps_pert = np.ones(shape=body.aero_disps.shape)
+            body.aero_disps_pert[::2]=0.5
             body.aero_disps += epsilon*body.aero_disps_pert
             adjoint_product += np.dot(body.dGdua[:, 0], body.aero_disps_pert) 
         if body.thermal_transfer is not None:
             # Aerothermal Terms
             adjoint_product_t = 0.0
-            body.aero_temps_pert = np.random.uniform(size=body.aero_temps.shape)
+            #body.aero_temps_pert = np.random.uniform(size=body.aero_temps.shape)
+            body.aero_temps_pert = np.ones(shape=body.aero_temps.shape)
+            body.aero_temps_pert[::2] = 0.5
             body.aero_temps += epsilon*body.aero_temps_pert
             adjoint_product_t += np.dot(body.dAdta[:, 0], body.aero_temps_pert)
         
@@ -201,17 +209,11 @@ class wedge_adjoint(object):
             fd_product_t += np.dot(fd, body.dQdfta[:, 0])
             print('FUN3D FUNtoFEM adjoint result (thermal):           ', adjoint_product_t)
             print('FUN3D FUNtoFEM finite-difference result (thermal): ', fd_product_t)
-            """
-            print('body.aero_heat_flux = ', body.aero_heat_flux)
-            print('body.aero_heat_flux_copy = ', body.aero_heat_flux_copy)
-            print('fd = ', fd)
-            print('fd_product_t = ', fd_product_t)
-            print('body.dQdfta = ', body.dQdfta)
-            """
         if body.transfer is not None and body.thermal_transfer is not None:    
             # Total
             print('FUN3D FUNtoFEM adjoint result (total):           ', (adjoint_product + adjoint_product_t))
             print('FUN3D FUNtoFEM finite-difference result (total): ', (fd_product + fd_product_t))        
+        """
 
         return 
         

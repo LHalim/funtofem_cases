@@ -79,7 +79,7 @@ class wedge_adjoint(object):
         solvers['structural'] = wedgeTACS(self.comm,self.tacs_comm,self.model,n_tacs_procs)
 
         # L&D transfer options
-        transfer_options = {'analysis_type': 'aerothermoelastic','scheme': 'meld', 'thermal_scheme': 'meld'}
+        transfer_options = {'analysis_type': 'aeroelastic','scheme': 'meld', 'thermal_scheme': 'meld'}
 
         # instantiate the driver
         self.driver = FUNtoFEMnlbgs(solvers,self.comm,self.tacs_comm,0,self.comm,0,transfer_options,model=self.model)
@@ -98,7 +98,7 @@ class wedge_adjoint(object):
         thickness = 0.015
         # Build the model
         model = FUNtoFEMmodel('wedge')
-        plate = Body('plate',analysis_type='aerothermoelastic',group=0,boundary=1)
+        plate = Body('plate',analysis_type='aeroelastic',group=0,boundary=1)
         plate.add_variable('structural',Variable('thickness',value=thickness,lower = 0.01, upper = 0.1))
         model.add_body(plate)
 
@@ -152,10 +152,10 @@ class wedge_adjoint(object):
 
         if body.transfer is not None:
             # Aeroelastic Terms
-            body.dLdfa = np.random.uniform(size=body.dLdfa.shape)       
+            body.dLdfa = np.ones(shape=body.dLdfa.shape)       
         if body.thermal_transfer is not None:
             # Aerothermal Terms
-            body.dQdfta = np.random.uniform(size=body.dQdfta.shape)
+            body.dQdfta = np.ones(shape=body.dQdfta.shape)
 
         #self.driver._solve_steady_adjoint(steady)
         for step in range(1,steps+1):
@@ -166,17 +166,17 @@ class wedge_adjoint(object):
         if body.transfer is not None:
             # Aeroelastic Terms
             adjoint_product = 0.0
-            body.aero_disps_pert = np.random.uniform(size=body.aero_disps.shape)
-            print('vector = ', body.aero_disps_pert)
-            print('vector size = ', body.aero_disps_pert.shape)
+            #body.aero_disps_pert = np.random.uniform(size=body.aero_disps.shape)
+            body.aero_disps_pert = np.ones(shape=body.aero_disps.shape)
+            body.aero_disps_pert[::2]=0.5
             body.aero_disps += epsilon*body.aero_disps_pert
             adjoint_product += np.dot(body.dGdua[:, 0], body.aero_disps_pert) 
         if body.thermal_transfer is not None:
             # Aerothermal Terms
             adjoint_product_t = 0.0
-            body.aero_temps_pert = np.random.uniform(size=body.aero_temps.shape)
-            print('vector 2 = ', body.aero_temps_pert)
-            print('vector 2 size = ', body.aero_temps_pert.shape)
+            #body.aero_temps_pert = np.random.uniform(size=body.aero_temps.shape)
+            body.aero_temps_pert = np.ones(shape=body.aero_temps.shape)
+            body.aero_temps_pert[::2] = 0.5
             body.aero_temps += epsilon*body.aero_temps_pert
             adjoint_product_t += np.dot(body.dAdta[:, 0], body.aero_temps_pert)
         
