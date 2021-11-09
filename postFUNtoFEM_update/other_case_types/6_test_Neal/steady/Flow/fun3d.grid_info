@@ -1,0 +1,83 @@
+Global Grid Info
+----------------
+
+   number of tet cells : 1001457
+
+   number of nodes     : 175925
+
+   number of edges     : 1190639
+
+   number of boundaries: 5
+
+   boundary info for boundary1
+     boundary condition         : viscous_solid (4000)
+     number of tria faces       : 14624
+     number of quad faces       : 0
+     number of nodes            : 7365
+
+   boundary info for boundary2
+     boundary condition         : viscous_solid (4000)
+     number of tria faces       : 5617
+     number of quad faces       : 0
+     number of nodes            : 3004
+
+   boundary info for boundary3
+     boundary condition         : viscous_solid (4000)
+     number of tria faces       : 5711
+     number of quad faces       : 0
+     number of nodes            : 3053
+
+   boundary info for boundary4
+     boundary condition         : viscous_solid (4000)
+     number of tria faces       : 234
+     number of quad faces       : 0
+     number of nodes            : 172
+
+   boundary info for boundary5
+     boundary condition         : farfield_riem (5000)
+     number of tria faces       : 332
+     number of quad faces       : 0
+     number of nodes            : 168
+
+
+Info for Grid Partition 1
+---------------------------
+
+   number of tet level 1  cells : 1001457
+
+   number of     level 0  nodes : 175925
+   number of     level 1  nodes : 0
+
+   number of     level 0  edges : 1190639
+   number of     level 01 edges : 1190639
+
+   boundary info for boundary 1
+     boundary condition         : viscous_solid (4000)
+     number of tria faces       : 14624
+     number of quad faces       : 0
+     number of nodes            : 7365
+
+   boundary info for boundary 2
+     boundary condition         : viscous_solid (4000)
+     number of tria faces       : 5617
+     number of quad faces       : 0
+     number of nodes            : 3004
+
+   boundary info for boundary 3
+     boundary condition         : viscous_solid (4000)
+     number of tria faces       : 5711
+     number of quad faces       : 0
+     number of nodes            : 3053
+
+   boundary info for boundary 4
+     boundary condition         : viscous_solid (4000)
+     number of tria faces       : 234
+     number of quad faces       : 0
+     number of nodes            : 172
+
+   boundary info for boundary 5
+     boundary condition         : farfield_riem (5000)
+     number of tria faces       : 332
+     number of quad faces       : 0
+     number of nodes            : 168
+
