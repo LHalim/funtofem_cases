@@ -127,7 +127,7 @@ class wedge_adjoint(object):
         fail = self.driver.solve_adjoint()
 
         print('FINISHED')
-        """
+        #"""
         #solve_forward() 1
         self.driver._distribute_variables(steady, bodies)
         self.driver._distribute_functions(steady, bodies)
@@ -213,7 +213,7 @@ class wedge_adjoint(object):
             # Total
             print('FUN3D FUNtoFEM adjoint result (total):           ', (adjoint_product + adjoint_product_t))
             print('FUN3D FUNtoFEM finite-difference result (total): ', (fd_product + fd_product_t))        
-        """
+        #"""
 
         return 
         

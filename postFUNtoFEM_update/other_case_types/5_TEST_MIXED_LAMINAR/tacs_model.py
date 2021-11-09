@@ -50,7 +50,7 @@ class wedgeTACS(TacsSteadyInterface):
             model_plate = elements.LinearThermoelasticity3D(con_plate)
 
             # Create the basis class
-            quad_basis = elements.LinearHexaBasis()
+            quad_basis = elements.LinearQuadBasis()
 
             #con_plate = constitutive.PlaneStressConstitutive(props_plate, t=1.0, tNum=0)
             #model_plate = elements.HeatConduction2D(con_plate)
