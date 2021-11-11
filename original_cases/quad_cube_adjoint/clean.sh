@@ -1,5 +1,6 @@
 rm -f core*
 rm -f opt.out
+rm -f run.pbs.*
 rm -f test.*
 rm -f *tec_boundary*
 rm -f tacs_iter*
